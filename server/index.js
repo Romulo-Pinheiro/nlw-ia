@@ -15,7 +15,7 @@ app.get('/summary/:id', async (request, response) => {
     const audioConverted = await convert()
     const result = await transcribe(audioConverted)
   
-    response.json({ result })
+    return response.json({ result })
   } catch(error){
     console.log(error)
     return response.json({ error })
@@ -28,7 +28,7 @@ app.post("/summary", async (request, response) => {
     return response.json({ result })
   } catch(error){
     console.log(error)
-    response.json({ error })
+    return response.json({ error })
   }
 })
 

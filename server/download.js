@@ -1,13 +1,15 @@
 import ytdl from 'ytdl-core'
 import fs from 'fs'
 
-export const download = (videoId) => new Promise((resolve, reject) => {
+export const download = (videoId) => 
+  new Promise((resolve, reject) => {
   const videoUrl = "https://www.youtube.com/shorts/" + videoId
   console.log("Downloading video: " + videoId)
 
-  ytdl(videoUrl, {quality: "lowestaudio", filter:"audioonly"}).on("info", (info) => {
+  ytdl(videoUrl, { quality: "lowestaudio", filter: "audioonly"})
+  .on("info", (info) => {
     const seconds = info.formats[0].approxDurationMs / 1000
-    if(seconds > 60){
+    if (seconds > 60) {
       throw new Error("The duration of this video is longer than 60 seconds.")
     }
 
@@ -17,5 +19,6 @@ export const download = (videoId) => new Promise((resolve, reject) => {
   }).on("error", (error) => {
     console.log("Couldn't download video. Details:", error)
     reject(error)
-  }).pipe(fs.createWriteStream("./tmp/audio.mp4"))
+  })
+  .pipe(fs.createWriteStream("./tmp/audio.mp4"))
 })

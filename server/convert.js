@@ -6,7 +6,8 @@ import ffmpegStatic from 'ffmpeg-static'
 const filePath = "./tmp/audio.mp4"
 const outputPath = filePath.replace(".mp4", ".wav")
 
-export const convert = () => new Promise((resolve, reject) => {
+export const convert = () => 
+  new Promise((resolve, reject) => {
   console.log("Converting video...")
   ffmpeg.setFfmpegPath(ffmpegStatic)
   ffmpeg()
@@ -14,7 +15,7 @@ export const convert = () => new Promise((resolve, reject) => {
   .audioFrequency(16000)
   .audioChannels(1)
   .format("wav")
-  .on("end", () =>{
+  .on("end", () => {
     const file = fs.readFileSync(outputPath)
     const fileDecoded = wav.decode(file)
 

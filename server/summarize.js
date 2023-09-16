@@ -1,8 +1,8 @@
 import { pipeline } from "@xenova/transformers"
 
-export async function summarize(text){
+export async function summarize(text) {
   try {
-    console.log("Realizando o resumo...")
+    console.log("Generating the summary...")
     const generator = await pipeline(
       "summarization",
       "Xenova/distilbart-cnn-12-6"
